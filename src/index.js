@@ -11,7 +11,7 @@ app.use(bodyParser.json())
 // your code goes here
 const studentArray = require("./initialData.js");
 
-app.get("/" , (req,res)=>{
+app.get("/api/student" , (req,res)=>{
     res.send(JSON.stringify(studentArray));
 })
 
