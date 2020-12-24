@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 // your code goes here
-const studentArray = require("./initialData.js");
+const studentArray = require("./InitialData");
 
 app.get("/api/student" , (req,res)=>{
     res.send(studentArray);
