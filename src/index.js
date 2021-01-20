@@ -52,15 +52,17 @@ app.put("/api/student/:id",(req,res)=>{
     const update = req.body;
     const id = req.params.id;
     const matchedIdx = studentArray.findIndex((stud)=>stud.id===Number(id));
+   
     if(matchedIdx===-1) res.sendStatus(400);
     let {name , currentClass , division}=update;
-    if(isValid(name) || isValid(currentClass) || isValid(division)) res.sendStatus(400);
+    if(isValid(name)&&isValid(currentClass)&&isValid(division)) res.sendStatus(400);
     else {
-        !isValid(name)?studentArray[matchedIdx].name=name:null;
-        !isValid(currentClass)?studentArray[matchedIdx].currentClass=Number(currentClass):null;
-        !isValid(division)?studentArray[matchedIdx].division=division:null;
+        studentArray[matchedIdx].name = !isValid(name)?name:studentArray[matchedIdx].name ;
+        studentArray[matchedIdx].currentClass = (!isValid(currentClass) && parseInt(currentClass)) ?Number(currentClass):studentArray[matchedIdx].currentClass;
+        studentArray[matchedIdx].division = !isValid(division)?division:studentArray[matchedIdx].division;
         res.sendStatus(200);
     }
+
 })
 
 app.delete("/api/student/:id" , (req,res)=>{
